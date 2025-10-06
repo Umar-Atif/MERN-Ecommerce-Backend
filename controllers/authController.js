@@ -22,8 +22,8 @@ const registerUser = async (req, res) => {
     // set cookie
     res.cookie("token", generateToken(user._id, user.isAdmin), {
       httpOnly: true,
-      secure: false,
-      sameSite: "strict",
+      secure: true,
+      sameSite: none,
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
@@ -54,8 +54,8 @@ const loginUser = async (req, res) => {
     // set cookie
     res.cookie("token", generateToken(user._id, user.isAdmin), {
       httpOnly: true,
-      secure: false,
-      sameSite: "strict",
+      secure: true,
+      sameSite: none,
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 

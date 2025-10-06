@@ -19,6 +19,8 @@ dotenv.config();
 //     })
 //     .catch(err => console.log(err));
 
+const app = express();
+
 // Connect DB
 let isConnected = false;
 async function connectDB() {
@@ -38,7 +40,6 @@ app.use((req, res, next) => {
     next();
 })
 
-const app = express();
 app.get('/', (req, res) => {
     res.send("Hello World");
 });

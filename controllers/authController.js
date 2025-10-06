@@ -4,6 +4,8 @@ const { validationResult } = require("express-validator");
 
 const generateToken = require("../config/jwt");
 
+const isProduction = process.env.NODE_ENV === "production";
+
 // Register
 const registerUser = async (req, res) => {
   const errors = validationResult(req);
@@ -22,8 +24,8 @@ const registerUser = async (req, res) => {
     // set cookie
     res.cookie("token", generateToken(user._id, user.isAdmin), {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 
@@ -54,8 +56,8 @@ const loginUser = async (req, res) => {
     // set cookie
     res.cookie("token", generateToken(user._id, user.isAdmin), {
       httpOnly: true,
-      secure: true,
-      sameSite: "none",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000
     });
 

@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 // Middlewares
-const allowedOrigins = ["https://mern-ecommerce-frontend-sigma-eight.vercel.app/"];
+const allowedOrigins = ["https://mern-ecommerce-frontend-sigma-eight.vercel.app/", "localhost:5173"];
 app.use(cookieParser());
 app.use(cors({
   origin: function (origin, callback) {

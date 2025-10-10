@@ -1,4 +1,4 @@
-const { addProduct, getProducts, updateProduct, deleteProduct, getSingleProduct } = require("../controllers/productController");
+const { addProduct, getProducts, updateProduct, deleteProduct, getSingleProduct, toggleProductStock } = require("../controllers/productController");
 const { protect, adminOnly } = require("../middleware/authMiddleware");
 const { body } = require("express-validator");
 const upload = require("../middleware/uploadMiddleware");
@@ -26,5 +26,6 @@ router.post(
 
 router.put("/:id", protect, adminOnly, upload.single("image"), updateProduct);
 router.delete("/:id", protect, adminOnly, deleteProduct);
+router.put("/stock/:id", protect, adminOnly, toggleProductStock);
 
 module.exports = router;

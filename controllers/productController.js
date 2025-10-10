@@ -81,4 +81,21 @@ const deleteProduct = async (req, res) => {
     }
 };
 
-module.exports = { addProduct, getProducts, getSingleProduct, updateProduct, deleteProduct };
+// Toggle Product Stock
+const toggleProductStock = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findById(id);
+
+        if (!product) return res.status(404).json({ message: "Product not found" });
+
+        product.stock = !product.stock;
+        await product.save();
+
+        res.json({ message: "Stock status updated", stock: product.stock });
+    } catch (error) {
+        res.status(500).json({ message: "Error toggling stock" });
+    }
+};
+
+module.exports = { addProduct, getProducts, getSingleProduct, updateProduct, deleteProduct, toggleProductStock };
